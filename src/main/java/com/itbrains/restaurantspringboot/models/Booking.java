@@ -17,6 +17,6 @@ public class Booking {
     private int numOfPeople;
     private String request;
     private Date requestDate;
-    private boolean isCompleted;
-    private boolean isCancelled;
+    private boolean isCompleted=false;
+    private boolean isCancelled=false;
 }

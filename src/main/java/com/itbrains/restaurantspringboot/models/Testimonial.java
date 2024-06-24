@@ -16,4 +16,7 @@ public class Testimonial {
     private Date postedDate;
     @ManyToOne
     private User user;
+
+    @ManyToOne
+    private Chef chef;
 }

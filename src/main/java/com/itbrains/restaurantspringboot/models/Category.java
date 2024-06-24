@@ -13,8 +13,9 @@ public class Category {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private long id;
     private String name;
+    @Column(columnDefinition = "boolean default false")
+    private boolean isDeleted;
 
-    @OneToMany
-    @JoinColumn(name = "foods", nullable = false)
+    @OneToMany(mappedBy = "category")
     private List<Food> foods;
 }

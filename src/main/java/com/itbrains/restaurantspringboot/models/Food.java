@@ -17,4 +17,9 @@ public class Food {
 
     @ManyToOne
     private Category category;
+
+    @ManyToOne
+    private Chef chef;
+
+
 }
