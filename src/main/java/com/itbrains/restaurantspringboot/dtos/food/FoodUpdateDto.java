@@ -10,6 +10,6 @@ public class FoodUpdateDto {
     private String name;
     public String photoUrl;
     private double price;
-    private Category category;
-    private Chef chefOfFood;
+    private Long categoryId;
+    private Long chefId;
 }

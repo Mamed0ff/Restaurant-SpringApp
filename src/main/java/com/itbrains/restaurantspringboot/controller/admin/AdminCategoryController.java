@@ -2,6 +2,7 @@ package com.itbrains.restaurantspringboot.controller.admin;
 
 import com.itbrains.restaurantspringboot.dtos.category.CategoryCreateDto;
 import com.itbrains.restaurantspringboot.dtos.category.CategoryDto;
+import com.itbrains.restaurantspringboot.dtos.category.CategoryMenuDto;
 import com.itbrains.restaurantspringboot.models.Category;
 import com.itbrains.restaurantspringboot.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class AdminCategoryController {
 
     @GetMapping("/admin/category")
     public String adminCategory(Model model) {
-        List<CategoryDto> categories = categoryService.getAllCategories();
+        List<CategoryDto> categories = categoryService.getAllCategory();
         model.addAttribute("categories", categories);
         return "admin/category/category";
     }

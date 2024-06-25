@@ -8,7 +8,50 @@
 </head>
 <body>
 <div layout:fragment="~{Content}">
+    <a href="/admin/team/create" class="btn btn-primary">Create</a>
 
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Speciality</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Speciality</th>
+                        <th>Action</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <tr th:each="chef :${chefs}">
+                        <td th:text="${chef.getId()}"></td>
+                        <td > <img th:src="${chef.getPhotoUrl()}" width="100px"/> </td>
+                        <td th:text="${chef.getName()}"></td>
+                        <td th:text="${chef.getSurname()}"></td>
+                        <td th:text="${chef.getSpeciality()}"></td>
+                        <td><a th:href="'/admin/team/update/'+${chef.getId()}" class = "btn btn-outline-warning">Update</a>
+                            <a th:href="'/admin/team/remove/' +${chef.getId()}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
 </div>
 </body>

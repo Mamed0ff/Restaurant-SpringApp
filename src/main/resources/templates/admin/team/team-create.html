@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/adminLayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="~{Content}">
+    <form method="post" action="/admin/team/create">
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="Name" name="name" />
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="Surname" name="surname" />
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="Photo Url" name="photoUrl" />
+        </div>
+        <div>
+            <input class = "form-control" type="text" placeholder="Speciality" name="speciality">
+        </div>
+        <br>
+        <input type="submit" value="Create" class="btn btn-success" />
+        <a class="btn btn-primary" href="/admin/team">Cancel</a>
+    </form>
+
+
+
+
+
+
+
+    </form>
+
+
+
+
+
+
+
+</div>
+</body>
+</html>

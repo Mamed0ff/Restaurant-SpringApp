@@ -3,6 +3,7 @@ package com.itbrains.restaurantspringboot.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,6 +17,6 @@ public class Category {
     @Column(columnDefinition = "boolean default false")
     private boolean isDeleted;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Food> foods;
 }

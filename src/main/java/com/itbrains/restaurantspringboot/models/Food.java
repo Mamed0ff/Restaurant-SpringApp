@@ -14,6 +14,7 @@ public class Food {
     public String photoUrl;
     private double price;
     private int quantity = 1;
+    private boolean isDeleted =false;
 
     @ManyToOne
     private Category category;

@@ -2,6 +2,7 @@ package com.itbrains.restaurantspringboot.services.impls;
 
 import com.itbrains.restaurantspringboot.dtos.category.CategoryCreateDto;
 import com.itbrains.restaurantspringboot.dtos.category.CategoryDto;
+import com.itbrains.restaurantspringboot.dtos.category.CategoryMenuDto;
 import com.itbrains.restaurantspringboot.models.Category;
 import com.itbrains.restaurantspringboot.repos.CategoryRepository;
 import com.itbrains.restaurantspringboot.services.CategoryService;
@@ -31,10 +32,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDto> getAllCategories() {
+    public List<CategoryMenuDto> getAllMenuCategories() {
         List<Category> categories = categoryRepository.findAll();
-        List<CategoryDto> categoryDtos = categories.stream().filter(x->x.isDeleted() == false).map(category-> modelMapper.map(category, CategoryDto.class)).collect(Collectors.toList());
-        return categoryDtos;
+        List<CategoryMenuDto> categoryMenuDto = categories.stream().filter(x->x.isDeleted() == false).map(category-> modelMapper.map(category, CategoryMenuDto.class)).collect(Collectors.toList());
+        return categoryMenuDto;
     }
 
     @Override
@@ -55,5 +56,11 @@ public class CategoryServiceImpl implements CategoryService {
         Category category=categoryRepository.findById(updatedCategoryDto.getId()).orElseThrow();
         category.setName(updatedCategoryDto.getName());
         categoryRepository.save(category);
+    }
+
+    @Override
+    public List<CategoryDto> getAllCategory() {
+        List<Category> categories = categoryRepository.findAll();
+        return categories.stream().filter(x->!x.isDeleted()).map(category-> modelMapper.map(category, CategoryDto.class)).collect(Collectors.toList());
     }
 }

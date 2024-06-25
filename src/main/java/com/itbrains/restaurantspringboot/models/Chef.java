@@ -18,8 +18,7 @@ public class Chef {
     public String photoUrl;
     private String speciality;
     private Date joinedDate;
-    @Column(columnDefinition = "boolean default true")
-    private boolean isHere;
+    private boolean isHere= true;
 
 
 }

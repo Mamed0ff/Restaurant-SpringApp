@@ -1,15 +1,14 @@
 package com.itbrains.restaurantspringboot.dtos.chef;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Date;
-
-@Data
-public class ChefDto {
+@Setter
+@Getter
+public class DeletedChefDto {
     private long id;
     private String surname;
     private String name;
-    private Date joinedDate;
     public String photoUrl;
     private String speciality;
 }

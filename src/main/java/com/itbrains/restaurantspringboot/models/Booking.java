@@ -13,10 +13,13 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private String email;
+    private int phoneNumber;
     private int numOfPeople;
     private String request;
     private Date requestDate;
     private boolean isCompleted=false;
     private boolean isCancelled=false;
+
+    @ManyToOne
+    private User user;
 }
