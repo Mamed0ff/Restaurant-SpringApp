@@ -4,7 +4,7 @@ import com.itbrains.restaurantspringboot.dtos.booking.BookingCreateDto;
 import com.itbrains.restaurantspringboot.dtos.booking.BookingDto;
 import com.itbrains.restaurantspringboot.dtos.user.UserDto;
 import com.itbrains.restaurantspringboot.models.Booking;
-import com.itbrains.restaurantspringboot.models.User;
+import com.itbrains.restaurantspringboot.models.UserEntity;
 import com.itbrains.restaurantspringboot.repos.BookingRepository;
 import com.itbrains.restaurantspringboot.services.BookingService;
 import com.itbrains.restaurantspringboot.services.UserEntityService;
@@ -31,7 +31,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void addBooking(BookingCreateDto bookingCreateDto, String email) {
         UserDto userDto = userEntityService.findUserByEmail(email);
-        User user = modelMapper.map(userDto, User.class);
+        UserEntity user = modelMapper.map(userDto, UserEntity.class);
        Booking booking = modelMapper.map(bookingCreateDto, Booking.class);
        booking.setUser(user);
        booking.setRequestDate(new Date());

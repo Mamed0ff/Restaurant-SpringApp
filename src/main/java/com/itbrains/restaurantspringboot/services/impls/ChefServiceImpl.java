@@ -7,6 +7,7 @@ import com.itbrains.restaurantspringboot.dtos.chef.DeletedChefDto;
 import com.itbrains.restaurantspringboot.models.Chef;
 import com.itbrains.restaurantspringboot.repos.ChefRepository;
 import com.itbrains.restaurantspringboot.services.ChefService;
+import com.itbrains.restaurantspringboot.services.EmailService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public class ChefServiceImpl implements ChefService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public void addChef(ChefCreateDto chefCreateDto) {
@@ -60,6 +63,7 @@ public class ChefServiceImpl implements ChefService {
 
     @Override
     public List<ChefDto> getAllChefs() {
+        emailService.sendConfirmationEmail("rizvan.memmedov2004@gmail.com");
         List<Chef> chefs = chefRepository.findAll();
         List<ChefDto> chefDtos = chefs.stream().filter(x-> x.isHere() ==true).map(chef->modelMapper.map(chef,ChefDto.class)).collect(Collectors.toList());
         return chefDtos;

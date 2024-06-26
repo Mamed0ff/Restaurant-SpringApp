@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MenuController {
 
-    @GetMapping("/menu")
+    @GetMapping("/home/menu")
     public String index(){
         return "menu";
     }

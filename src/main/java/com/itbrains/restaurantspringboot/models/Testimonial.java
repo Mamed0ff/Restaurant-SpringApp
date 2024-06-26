@@ -15,7 +15,7 @@ public class Testimonial {
     private String description;
     private Date postedDate;
     @ManyToOne
-    private User user;
+    private UserEntity user;
 
     @ManyToOne
     private Chef chef;

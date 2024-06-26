@@ -26,5 +26,5 @@ public class Order {
     private List<Food> foods;
 
     @ManyToOne
-    private User user;
+    private UserEntity user;
 }

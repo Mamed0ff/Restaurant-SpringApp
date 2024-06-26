@@ -21,5 +21,5 @@ public class Booking {
     private boolean isCancelled=false;
 
     @ManyToOne
-    private User user;
+    private UserEntity user;
 }
