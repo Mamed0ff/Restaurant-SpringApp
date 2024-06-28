@@ -4,6 +4,7 @@ import com.itbrains.restaurantspringboot.dtos.food.FoodCreateDto;
 import com.itbrains.restaurantspringboot.dtos.food.FoodDto;
 import com.itbrains.restaurantspringboot.dtos.food.FoodMenuDto;
 import com.itbrains.restaurantspringboot.dtos.food.FoodUpdateDto;
+import com.itbrains.restaurantspringboot.models.Food;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface FoodService {
     public FoodUpdateDto findUpdateFoodById(Long id);
     public List<FoodDto> getDeletedFoods();
     public List<FoodDto> getAllFoods();
+    public FoodDto getFoodById(long id);
+    Food getRealFoodById(Long id);
 }

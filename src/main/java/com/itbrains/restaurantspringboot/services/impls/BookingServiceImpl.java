@@ -30,8 +30,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void addBooking(BookingCreateDto bookingCreateDto, String email) {
-        UserDto userDto = userEntityService.findUserByEmail(email);
-        UserEntity user = modelMapper.map(userDto, UserEntity.class);
+        UserEntity user = userEntityService.findRealUserByEmail(email);
        Booking booking = modelMapper.map(bookingCreateDto, Booking.class);
        booking.setUser(user);
        booking.setRequestDate(new Date());

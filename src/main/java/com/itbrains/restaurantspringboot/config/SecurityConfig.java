@@ -27,17 +27,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(x->x.disable())
-                .authorizeHttpRequests(request-> request.anyRequest().permitAll()
-//                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
-//                        .requestMatchers(HttpMethod.GET,"/admin/**").hasAuthority("MODERATOR")
-//                        .requestMatchers("/home/**").permitAll()
-//                        .requestMatchers(HttpMethod.POST, "/home/**").authenticated() // Require authentication for all POST requests
-
+                .authorizeHttpRequests(request-> request
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                        .requestMatchers("/home/profile").hasAuthority("USER")
+                        .requestMatchers(HttpMethod.POST, "/home/**").authenticated() // Require authentication for all POST requests
+                        .requestMatchers("/home/**").permitAll()
+                        .anyRequest().permitAll()
                 )
 
                 .formLogin(form->form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/admin")
+                        .defaultSuccessUrl("/home")
                 );
         return http.build();
     }

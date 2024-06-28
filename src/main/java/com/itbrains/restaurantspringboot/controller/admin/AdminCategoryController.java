@@ -3,6 +3,7 @@ package com.itbrains.restaurantspringboot.controller.admin;
 import com.itbrains.restaurantspringboot.dtos.category.CategoryCreateDto;
 import com.itbrains.restaurantspringboot.dtos.category.CategoryDto;
 import com.itbrains.restaurantspringboot.dtos.category.CategoryMenuDto;
+import com.itbrains.restaurantspringboot.dtos.category.CategoryUpdateDto;
 import com.itbrains.restaurantspringboot.models.Category;
 import com.itbrains.restaurantspringboot.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,7 @@ public class AdminCategoryController {
     }
 
     @PostMapping("/admin/category/update")
-    public String categoryUpdate(@ModelAttribute CategoryDto categoryDto){
+    public String categoryUpdate(@ModelAttribute CategoryUpdateDto categoryDto){
         categoryService.updateCategory(categoryDto);
         return "redirect:/admin/category";
     }

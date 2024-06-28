@@ -1,14 +1,13 @@
 package com.itbrains.restaurantspringboot.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -18,6 +17,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @ManyToMany(mappedBy = "roles")
-    private List<UserEntity> users = new ArrayList<>();
+
+//    @ManyToMany(mappedBy = "roles")
+//    private List<UserEntity> users = new ArrayList<>();
 }

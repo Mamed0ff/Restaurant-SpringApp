@@ -78,7 +78,44 @@
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
+    <div class="container-xxl py-5 px-0 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="row g-0">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-lg-6 d-none d-lg-block">
+                        <img src="/homeFiles/img/about-3.jpg" width="500px" height="500px">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 bg-dark d-flex align-items-center">
+                <div class="p-5 wow fadeInUp" data-wow-delay="0.2s">
+                    <h5 class="section-title ff-secondary text-start text-primary fw-normal">Testimonial</h5>
+                    <h1 class="text-white mb-4">Share Your Feedback</h1>
+                    <form method="post" action="/home/testimonial/create">
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <select name="foodId"  class="form-control" >
+                                        <option th:each="food : ${foods}" th:text="${food.getName()}" th:value="${food.getId()}"></option>
+                                    </select>
+                                    <label >Foods</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Special Request" id="message" style="height: 100px" name="description"></textarea>
+                                    <label for="message">Your Feedback</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Share now</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

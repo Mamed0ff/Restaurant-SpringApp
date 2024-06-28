@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrapper {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 220px;
+            background-color: #0f172b;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgb(252, 160, 22);
+            height: 700px;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+
+        .category-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .category-list li {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .category-list li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border: 1px solid #fca016;
+            border-radius: 5px;
+            background-color: #0f172b;
+            transition: background-color 0.3s ease;
+        }
+
+        .category-list li a:hover {
+            background-color: #575757;
+        }
+
+        #content-wrapper {
+            margin-left: 30px; /* Adjusted to account for the sidebar on the left */
+            padding: 20px;
+            flex: 1;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .food-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin: 20px;
+            width: 250px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .food-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .food-item h5 {
+            margin: 10px 0;
+            font-size: 1.5em;
+        }
+
+        .food-item small {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+        .food-item button {
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        .food-item .add-to-cart {
+            background-color: #fca016;
+        }
+
+        .food-item button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="~{Content}">
+
+    <div class="container-xxl py-5 bg-dark hero-header mb-5">
+        <div class="container text-center my-5 pt-5 pb-4">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Services</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center text-uppercase">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Service</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <div class="sidebar">
+            <h2>Categories</h2>
+            <ul class="category-list">
+                <li th:each="category : ${categories}">
+                    <a th:text="${category.getName()}" th:href="@{'/home/eFoods/' + ${category.getId()}}"></a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper">
+
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="card-container">
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s" th:each="food : ${foods}">
+                            <div class="food-item text-center rounded overflow-hidden">
+                                <div class="rounded overflow-hidden m-4">
+                                    <img class="img-fluid" th:src="${food.getPhotoUrl()}" alt="Food Image">
+                                </div>
+                                <h5 class="mb-0" th:text="${food.getName()}">Food Name</h5>
+                                <small th:text="'$' + ${food.getPrice()}">Food Price</small>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <a class="btn btn-success mx-1 add-to-cart" th:href="'/home/basket/add/'+${food.getId()}">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+</div>
+</body>
+</html>

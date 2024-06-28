@@ -14,5 +14,5 @@ public class CategoryMenuDto {
     private long id;
     private String name;
 
-    private List<FoodDto> foods=new ArrayList<>();
+    private List<Food> foods;
 }

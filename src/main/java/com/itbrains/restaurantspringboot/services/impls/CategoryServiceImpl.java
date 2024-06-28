@@ -3,6 +3,7 @@ package com.itbrains.restaurantspringboot.services.impls;
 import com.itbrains.restaurantspringboot.dtos.category.CategoryCreateDto;
 import com.itbrains.restaurantspringboot.dtos.category.CategoryDto;
 import com.itbrains.restaurantspringboot.dtos.category.CategoryMenuDto;
+import com.itbrains.restaurantspringboot.dtos.category.CategoryUpdateDto;
 import com.itbrains.restaurantspringboot.models.Category;
 import com.itbrains.restaurantspringboot.repos.CategoryRepository;
 import com.itbrains.restaurantspringboot.services.CategoryService;
@@ -52,7 +53,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void updateCategory(CategoryDto updatedCategoryDto) {
+    public void updateCategory(CategoryUpdateDto updatedCategoryDto) {
         Category category=categoryRepository.findById(updatedCategoryDto.getId()).orElseThrow();
         category.setName(updatedCategoryDto.getName());
         categoryRepository.save(category);
@@ -62,5 +63,23 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryDto> getAllCategory() {
         List<Category> categories = categoryRepository.findAll();
         return categories.stream().filter(x->!x.isDeleted()).map(category-> modelMapper.map(category, CategoryDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Category getRealCategoryById(Long id) {
+        return categoryRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public List<CategoryDto> findTop3ByOrderByIdAsc() {
+        List<Category> categories = categoryRepository.findTop3ByOrderByIdAsc();
+        List<CategoryDto> menu = categories.stream().map(category -> modelMapper.map(category, CategoryDto.class)).collect(Collectors.toList());
+        return menu;
+    }
+
+    @Override
+    public CategoryMenuDto findCategoryMenuById(Long id) {
+        Category category=categoryRepository.findById(id).orElseThrow();
+        return modelMapper.map(category, CategoryMenuDto.class);
     }
 }

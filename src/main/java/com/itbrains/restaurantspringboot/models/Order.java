@@ -2,12 +2,15 @@ package com.itbrains.restaurantspringboot.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "orders")
 public class Order {
     @Id

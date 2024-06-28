@@ -2,10 +2,13 @@ package com.itbrains.restaurantspringboot.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "testimonials")
 public class Testimonial {
@@ -14,9 +17,11 @@ public class Testimonial {
     private long id;
     private String description;
     private Date postedDate;
+    private boolean isDeleted = false;
+
     @ManyToOne
     private UserEntity user;
 
     @ManyToOne
-    private Chef chef;
+    private Food food;
 }

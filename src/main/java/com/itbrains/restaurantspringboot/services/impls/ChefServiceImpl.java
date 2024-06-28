@@ -1,9 +1,6 @@
 package com.itbrains.restaurantspringboot.services.impls;
 
-import com.itbrains.restaurantspringboot.dtos.chef.ChefCreateDto;
-import com.itbrains.restaurantspringboot.dtos.chef.ChefDto;
-import com.itbrains.restaurantspringboot.dtos.chef.ChefUpdateDto;
-import com.itbrains.restaurantspringboot.dtos.chef.DeletedChefDto;
+import com.itbrains.restaurantspringboot.dtos.chef.*;
 import com.itbrains.restaurantspringboot.models.Chef;
 import com.itbrains.restaurantspringboot.repos.ChefRepository;
 import com.itbrains.restaurantspringboot.services.ChefService;
@@ -19,14 +16,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class ChefServiceImpl implements ChefService {
+
     @Autowired
     private ChefRepository chefRepository;
 
     @Autowired
     private ModelMapper modelMapper;
-
-    @Autowired
-    private EmailService emailService;
 
     @Override
     public void addChef(ChefCreateDto chefCreateDto) {
@@ -63,7 +58,6 @@ public class ChefServiceImpl implements ChefService {
 
     @Override
     public List<ChefDto> getAllChefs() {
-        emailService.sendConfirmationEmail("rizvan.memmedov2004@gmail.com");
         List<Chef> chefs = chefRepository.findAll();
         List<ChefDto> chefDtos = chefs.stream().filter(x-> x.isHere() ==true).map(chef->modelMapper.map(chef,ChefDto.class)).collect(Collectors.toList());
         return chefDtos;
@@ -74,5 +68,17 @@ public class ChefServiceImpl implements ChefService {
         List<Chef> chefs = chefRepository.findAll();
         List<DeletedChefDto> chefDeletedDtos = chefs.stream().filter(x-> x.isHere() ==false).map(chef->modelMapper.map(chef,DeletedChefDto.class)).collect(Collectors.toList());
         return chefDeletedDtos;
+    }
+
+    @Override
+    public Chef getRealChefById(Long chefId) {
+        return chefRepository.findById(chefId).orElseThrow();
+    }
+
+    @Override
+    public List<ChefShowDto> findTop4ByOrderByIdAsc() {
+        List<Chef> chefs = chefRepository.findTop4ByOrderByIdAsc();
+        List<ChefShowDto> chefShowDtos = chefs.stream().map(chef-> modelMapper.map(chef,ChefShowDto.class)).collect(Collectors.toList());
+        return chefShowDtos;
     }
 }

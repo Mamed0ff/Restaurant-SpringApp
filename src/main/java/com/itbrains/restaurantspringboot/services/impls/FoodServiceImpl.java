@@ -50,11 +50,9 @@ public class FoodServiceImpl implements FoodService {
         food.setName(foodCreateDto.getName());
         food.setPhotoUrl(foodCreateDto.getPhotoUrl());
         food.setPrice(foodCreateDto.getPrice());
-        CategoryDto categoryDto = categoryService.getCategoryById(foodCreateDto.getCategoryId());
-        Category category = modelMapper.map(categoryDto,Category.class);
+        Category category = categoryService.getRealCategoryById(foodCreateDto.getCategoryId());
         food.setCategory(category);
-        ChefDto chefDto = chefService.getChefById(foodCreateDto.getChefId());
-        Chef chef = modelMapper.map(chefDto,Chef.class);
+        Chef chef = chefService.getRealChefById(foodCreateDto.getChefId());
         food.setChef(chef);
         foodRepository.save(food);
     }
@@ -65,11 +63,9 @@ public class FoodServiceImpl implements FoodService {
         findFood.setName(foodUpdateDto.getName());
         findFood.setPhotoUrl(foodUpdateDto.getPhotoUrl());
         findFood.setPrice(foodUpdateDto.getPrice());
-        CategoryDto categoryDto = categoryService.getCategoryById(foodUpdateDto.getCategoryId());
-        Category category = modelMapper.map(categoryDto,Category.class);
+        Category category = categoryService.getRealCategoryById(foodUpdateDto.getCategoryId());
         findFood.setCategory(category);
-        ChefDto chefDto = chefService.getChefById(foodUpdateDto.getChefId());
-        Chef chef = modelMapper.map(chefDto,Chef.class);
+        Chef chef = chefService.getRealChefById(foodUpdateDto.getChefId());
         findFood.setChef(chef);
         foodRepository.save(findFood);
     }
@@ -99,5 +95,16 @@ public class FoodServiceImpl implements FoodService {
         List<Food> foods = foodRepository.findAll();
         List<FoodDto> foodDtos= foods.stream().filter(x->x.isDeleted()==false).map(food->modelMapper.map(food,FoodDto.class)).collect(Collectors.toList());
         return foodDtos;
+    }
+
+    @Override
+    public FoodDto getFoodById(long id){
+        Food food = foodRepository.findById(id).orElseThrow();
+        return modelMapper.map(food,FoodDto.class);
+    }
+
+    @Override
+    public Food getRealFoodById(Long id) {
+        return foodRepository.findById(id).orElseThrow();
     }
 }

@@ -2,9 +2,12 @@ package com.itbrains.restaurantspringboot.dtos.booking;
 
 import com.itbrains.restaurantspringboot.dtos.user.UserDto;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
-@Data
+@Getter
+@Setter
 public class BookingDto {
 
     private long id;

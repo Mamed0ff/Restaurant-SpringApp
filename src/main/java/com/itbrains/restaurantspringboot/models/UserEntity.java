@@ -2,11 +2,14 @@ package com.itbrains.restaurantspringboot.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Setter
+@Getter
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -17,6 +20,7 @@ public class UserEntity {
     private String firstName;
     private String lastName;
     private String password;
+    private String photoUrl;
     private boolean emailConfirmed=false;
     private String confirmationToken;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -26,8 +30,16 @@ public class UserEntity {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
     private List<Role> roles = new ArrayList<>();
-    @OneToMany
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Order> orders;
-    @OneToMany
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Booking> bookings = new ArrayList<>();
+
+    @OneToOne(mappedBy = "user",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Basket basket;
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Testimonial> testimonials = new ArrayList<>();
 }
