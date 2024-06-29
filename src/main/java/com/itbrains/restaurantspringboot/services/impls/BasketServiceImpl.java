@@ -15,6 +15,7 @@ import com.itbrains.restaurantspringboot.services.UserEntityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class BasketServiceImpl implements BasketService {
         Food food = foodService.getRealFoodById(foodId);
         List<Food> foods = findBasket.getFoods();
         foods.add(food);
-        findBasket.setFoods(foods);   /// kinda sus
+        findBasket.setFoods(foods);
         double totalPrice = Calculator.calculator(findBasket.getFoods());
         findBasket.setTotalPrice(totalPrice);
         basketRepository.save(findBasket);
@@ -67,13 +68,15 @@ public class BasketServiceImpl implements BasketService {
     }
 
     @Override
+    @Transactional
     public void remove(Long foodId, String userEmail) {
         UserEntity userEntity = userService.findRealUserByEmail(userEmail);
-        Basket findBasket= userEntity.getBasket();
-        Food inFood = foodService.getRealFoodById(foodId);
-        List<Food> foods = findBasket.getFoods();
-        foods.remove(inFood);
-        findBasket.setFoods(foods);   /// kinda sus
+        basketRepository.removeFoodFromBasket(userEntity.getBasket().getId(),foodId);
+        Basket findBasket= basketRepository.findById(userEntity.getBasket().getId()).orElseThrow();
+//        Food inFood = foodService.getRealFoodById(foodId);
+//        List<Food> foods = findBasket.getFoods();
+//        foods.remove(inFood);
+//        findBasket.setFoods(foods);   /// kinda sus
         double totalPrice = Calculator.calculator(findBasket.getFoods());
         findBasket.setTotalPrice(totalPrice);
         basketRepository.save(findBasket);

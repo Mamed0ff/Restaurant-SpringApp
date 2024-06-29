@@ -37,11 +37,41 @@
                                             <span class="text-primary" th:text="'$'+${food.getPrice()}"></span>
                                         </h5>
                                         <small class="fst-italic" th:text="'Prepared by '+${food.getChef().getName()}"></small>
+                                        <a th:href="'/home/basket/remove/'+${food.getId()}" class="btn-outline-warning"> Remove</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <span th:text="'Total price $'+${profile.getBasket().getTotalPrice()}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">My Bookings</h5>
+            </div>
+            <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
+                <div class="tab-content">
+                    <div class="tab-pane fade show p-0 active">
+                        <div class="row g-4">
+                            <div class="col-lg-6" th:each="booking :${bookings}">
+                                <div class="d-flex align-items-center">
+                                    <div class="w-100 d-flex flex-column text-start ps-4">
+                                        <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                            <span th:text="${booking.getPhoneNumber()}"></span>
+                                            <span class="text-primary" th:text="'$'+${booking.getRequestDate()}"></span>
+                                        </h5>
+                                        <small class="fst-italic" th:text="'Your Request '+${booking.getRequest()}"></small>
+                                    </div>
+                                    <a class="btn-outline-danger" th:href="'/home/booking/cancel/'+${booking.getId()}">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

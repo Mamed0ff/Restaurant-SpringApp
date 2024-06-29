@@ -26,7 +26,7 @@ public class EmailServiceImpl implements EmailService {
         message.setFrom("rizvan.memmedov2004@gmail.com");
         message.setTo(email);
         message.setSubject("Confirmation email");
-        String res = "http://localhost:9009/auth/confrim?email="+email+"&token="+token;
+        String res = "http://localhost:9009/auth/confirm?email="+email+"&token="+token;
         message.setText(res);
 
         mailSender.send(message);

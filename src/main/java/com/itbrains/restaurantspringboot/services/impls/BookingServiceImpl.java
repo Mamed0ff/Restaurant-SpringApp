@@ -12,9 +12,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Locale.filter;
 
 
 @Service
@@ -60,6 +63,15 @@ public class BookingServiceImpl implements BookingService {
         booking.setCancelled(true);
         bookingRepository.save(booking);
 
+    }
+
+    @Override
+    public List<BookingDto> getUserBookings(String email) {
+        UserEntity user = userEntityService.findRealUserByEmail(email);
+        List<Booking> allBookings = user.getBookings();
+        List<BookingDto> bookings = allBookings.stream().filter(x-> !x.isCompleted() && !x.isCancelled()).map(booking
+                -> modelMapper.map(booking,BookingDto.class)).collect(Collectors.toList());
+        return bookings;
     }
 
 }

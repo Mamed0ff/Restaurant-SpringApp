@@ -1,9 +1,12 @@
 package com.itbrains.restaurantspringboot.controller;
 
 
+import com.itbrains.restaurantspringboot.dtos.booking.BookingDto;
 import com.itbrains.restaurantspringboot.dtos.user.ProfileDto;
 import com.itbrains.restaurantspringboot.dtos.user.RegisterDto;
+import com.itbrains.restaurantspringboot.models.Booking;
 import com.itbrains.restaurantspringboot.models.Food;
+import com.itbrains.restaurantspringboot.services.BookingService;
 import com.itbrains.restaurantspringboot.services.UserEntityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +26,8 @@ import java.util.List;
 @Controller
 public class AuthController {
 
-
+    @Autowired
+    private BookingService bookingService;
     @Autowired
     private UserEntityService userEntityService;
 
@@ -54,10 +58,12 @@ public class AuthController {
         model.addAttribute("profile", profileDto);
         List<Food> foods = profileDto.getBasket().getFoods();
         model.addAttribute("foods", foods);
+        List<BookingDto> bookings = bookingService.getUserBookings(email);
+        model.addAttribute("bookings", bookings);
         return "profile";
     }
 
-    @GetMapping("auth/confrim")
+    @GetMapping("auth/confirm")
     public String confirm(String email, String token)
     {
         boolean res = userEntityService.confirmEmail(email, token);

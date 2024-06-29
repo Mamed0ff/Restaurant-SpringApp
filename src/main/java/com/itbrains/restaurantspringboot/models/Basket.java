@@ -14,13 +14,13 @@ import java.util.List;
 public class Basket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private double totalPrice;
 
     @OneToOne
     private UserEntity user;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinTable(
             name = "basket_foods",
             joinColumns = {@JoinColumn(name = "basket_id", referencedColumnName = "id")},

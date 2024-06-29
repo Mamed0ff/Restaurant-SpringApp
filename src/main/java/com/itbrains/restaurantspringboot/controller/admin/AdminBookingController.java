@@ -29,9 +29,4 @@ public class AdminBookingController {
         return "redirect:/admin/booking";
     }
 
-    @GetMapping("/admin/booking/cancel/{id}")
-    public String bookingCancel(@PathVariable Long id) {
-        bookingService.getCancelled(id);
-        return "redirect:/admin/booking";
-    }
 }

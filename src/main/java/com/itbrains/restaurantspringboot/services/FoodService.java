@@ -18,4 +18,5 @@ public interface FoodService {
     public List<FoodDto> getAllFoods();
     public FoodDto getFoodById(long id);
     Food getRealFoodById(Long id);
+    public List<FoodMenuDto> searchFood(String keyword);
 }

@@ -38,7 +38,13 @@ public class SecurityConfig {
                 .formLogin(form->form
                         .loginPage("/login")
                         .defaultSuccessUrl("/home")
-                );
+                )
+                .logout(logout ->
+                        logout.logoutSuccessUrl("/home")
+                )
+                .exceptionHandling(e->e
+                        .accessDeniedPage("/login")
+                );;
         return http.build();
     }
 

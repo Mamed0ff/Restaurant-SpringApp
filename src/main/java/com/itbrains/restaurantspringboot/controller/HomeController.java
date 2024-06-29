@@ -1,5 +1,6 @@
 package com.itbrains.restaurantspringboot.controller;
 
+import com.itbrains.restaurantspringboot.dtos.about.AboutDto;
 import com.itbrains.restaurantspringboot.dtos.category.CategoryDto;
 import com.itbrains.restaurantspringboot.dtos.category.CategoryMenuDto;
 import com.itbrains.restaurantspringboot.dtos.chef.ChefShowDto;
@@ -7,10 +8,7 @@ import com.itbrains.restaurantspringboot.dtos.food.FoodDto;
 import com.itbrains.restaurantspringboot.dtos.food.FoodMenuDto;
 import com.itbrains.restaurantspringboot.dtos.testimonial.TestimonialShowDto;
 import com.itbrains.restaurantspringboot.models.Food;
-import com.itbrains.restaurantspringboot.services.CategoryService;
-import com.itbrains.restaurantspringboot.services.ChefService;
-import com.itbrains.restaurantspringboot.services.EmailService;
-import com.itbrains.restaurantspringboot.services.TestimontialService;
+import com.itbrains.restaurantspringboot.services.*;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +30,9 @@ public class HomeController {
     @Autowired
     private ChefService chefService;
 
+    @Autowired
+    private AboutService aboutService;
+
     @GetMapping("/home")
     public String index(Model model){
         List <CategoryDto> categories = categoryService.findTop3ByOrderByIdAsc();
@@ -46,6 +47,8 @@ public class HomeController {
         model.addAttribute("chefs", chefs);
         List<TestimonialShowDto> testimonials = testimontialService.findTop6ByOrderByIdAsc();
         model.addAttribute("testimonials", testimonials);
+        List<AboutDto> abouts = aboutService.getAll();
+        model.addAttribute("abouts", abouts);
         return "home";
     }
 }

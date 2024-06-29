@@ -107,4 +107,11 @@ public class FoodServiceImpl implements FoodService {
     public Food getRealFoodById(Long id) {
         return foodRepository.findById(id).orElseThrow();
     }
+
+    @Override
+    public List<FoodMenuDto> searchFood(String keyword) {
+        List<Food> foods = foodRepository.searchFood(keyword);
+        List<FoodMenuDto> searchedFoods = foods.stream().filter(x->!x.isDeleted()).map(food->modelMapper.map(food,FoodMenuDto.class)).collect(Collectors.toList());
+        return searchedFoods;
+    }
 }

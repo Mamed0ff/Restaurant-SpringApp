@@ -11,6 +11,7 @@ public interface BookingService {
     public List<BookingDto> getAvailableBookings();
     public void getCompleted(Long id);
     public void getCancelled(Long id);
+    public List<BookingDto> getUserBookings(String email);
 
 
 }

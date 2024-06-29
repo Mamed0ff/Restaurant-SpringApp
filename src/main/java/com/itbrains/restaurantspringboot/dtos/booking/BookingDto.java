@@ -16,5 +16,4 @@ public class BookingDto {
     private int phoneNumber;
     private String request;
     private Date requestDate;
-    private UserDto user;
 }

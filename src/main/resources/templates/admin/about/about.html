@@ -9,6 +9,7 @@
 <body>
 <div layout:fragment="~{Content}">
 
+    <a href="/admin/about/create" class="btn btn-primary">Create</a>
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -19,38 +20,34 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>People</th>
-                        <th>Date</th>
-                        <th>Phone</th>
-                        <th>Request</th>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Description</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
-                        <th>Name</th>
-                        <th>People</th>
-                        <th>Date</th>
-                        <th>Phone</th>
-                        <th>Request</th>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Description</th>
                         <th>Action</th>
                     </tr>
                     </tfoot>
                     <tbody>
-                    <tr th:each="booking :${bookings}">
-                        <td th:text="${booking.getName()}"></td>
-                        <td th:text="${booking.getNumOfPeople()}"></td>
-                        <td th:text="${booking.getRequestDate()}"></td>
-                        <td th:text="${booking.getPhoneNumber()}"></td>
-                        <td th:text="${booking.getRequest()}"></td>
-                        <td><a th:href="'/admin/booking/complete/'+${booking.getId()}" class = "btn btn-success">Competed</a>
+                    <tr th:each="about :${abouts}">
+                        <td th:text="${about.getId()}"></td>
+                        <td th:text="${about.getTitle()}"></td>
+                        <td th:text="${about.getDescription()}"></td>
+                        <td><a th:href="'/admin/about/update/'+${about.getId()}" class = "btn btn-outline-warning">Update</a>
+                            <a th:href="'/admin/about/remove/' +${about.getId()}" class="btn btn-danger">Delete</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
 </div>
 </body>
 </html>

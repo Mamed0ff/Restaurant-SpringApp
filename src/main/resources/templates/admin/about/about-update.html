@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/adminLayout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="~{Content}">
+
+    <form action="/admin/about/update" method="post">
+        <input th:value="${about.getId()}" class="form-control" type="hidden" placeholder="Title" name="id" />
+        <input class="form-control" type="text" placeholder="Category name" th:value="${about.getTitle()}" name="title" />
+        <br>
+        <textarea class="form-control" type="text" placeholder="Category name" th:text="${about.getDescription()}" name="description"></textarea>
+        <br>
+        <input type="submit" value="Update" class="btn btn-success" />
+        <a class="btn btn-primary" href="/admin/about">Cancel</a>
+    </form>
+
+
+</div>
+</body>
+</html>

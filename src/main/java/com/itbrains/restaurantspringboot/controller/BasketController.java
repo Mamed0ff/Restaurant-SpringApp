@@ -29,6 +29,6 @@ public class BasketController {
     public String removeBasket(@PathVariable Long id, Principal principal) {
         String email = principal.getName();
         basketService.remove(id,email);
-        return "redirect:/home/eFoods";
+        return "redirect:/home/profile";
     }
 }
